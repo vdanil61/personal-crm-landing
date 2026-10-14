@@ -1,0 +1,26 @@
+---
+const problems = [
+  "В телефоне записан «Саша Конференция», но кто это, уже не вспомнить",
+  "О чём-то договорились на встрече, а через месяц всё забылось",
+  "Нужен знакомый из прошлого, но неясно, где его искать: в чатах, в почте или в визитках",
+];
+---
+
+<section
+  aria-labelledby="problem-title"
+  class="flex flex-col gap-20 px-gutter pb-section lg:gap-40 lg:px-gutter-lg lg:pb-section-lg"
+>
+  <h2 id="problem-title" class="text-heading lg:text-heading-lg">Знакомо?</h2>
+  <ol class="flex flex-col gap-8 lg:grid lg:grid-cols-3 lg:gap-12">
+    {
+      problems.map((text, index) => (
+        <li class="box-content flex gap-8 bg-white px-16 py-18 lg:min-h-200 lg:flex-col lg:justify-between lg:gap-48 lg:px-28 lg:py-32">
+          <div aria-hidden="true" class="w-28 flex-none text-number text-accent-hover lg:w-auto lg:text-number-lg">
+            {String(index + 1).padStart(2, "0")}
+          </div>
+          <p class="text-problem lg:text-problem-lg">{text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

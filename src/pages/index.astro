@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import Benefits from "../components/Benefits.astro";
+import FinalCta from "../components/FinalCta.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Problem from "../components/Problem.astro";
+import Solution from "../components/Solution.astro";
+---
+
+<Base
+  title="Личная CRM"
+  description="Личная CRM для ваших знакомых. Кто этот человек, откуда вы знакомы, как с ним связаться и о чём договорились: всё в одной карточке."
+>
+  <div class="mx-auto max-w-page">
+    <Header />
+  </div>
+  <main>
+    <div class="mx-auto max-w-page">
+      <Hero />
+      <Problem />
+      <Solution />
+      <Benefits />
+    </div>
+    <FinalCta />
+  </main>
+</Base>

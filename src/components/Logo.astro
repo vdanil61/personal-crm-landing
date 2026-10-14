@@ -1,0 +1,18 @@
+---
+interface Props {
+  variant?: "header" | "footer";
+}
+
+const { variant = "header" } = Astro.props;
+const isFooter = variant === "footer";
+---
+
+<div
+  class:list={[
+    "flex items-center gap-8 lg:gap-10",
+    isFooter ? "text-logo-footer text-on-dark lg:text-logo-footer-lg" : "text-logo lg:text-logo-lg",
+  ]}
+>
+  <span aria-hidden="true" class:list={["bg-accent", isFooter ? "size-14 lg:size-16" : "size-18 lg:size-22"]}></span>
+  Личная CRM
+</div>

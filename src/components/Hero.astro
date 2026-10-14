@@ -1,0 +1,20 @@
+---
+import ContactCard from "./ContactCard.astro";
+import CtaButton from "./CtaButton.astro";
+---
+
+<section aria-labelledby="hero-title" class="pb-section lg:pb-section-lg">
+  <div
+    class="flex flex-col gap-28 px-gutter pt-24 lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:gap-80 lg:px-gutter-lg lg:pt-96"
+  >
+    <div class="flex flex-col gap-18 lg:gap-28">
+      <h1 id="hero-title" class="text-display lg:text-display-md xl:text-display-lg">Помните всех, кого знаете лично</h1>
+      <p class="text-lead text-muted lg:max-w-560 lg:text-lead-lg">
+        Личная CRM для ваших знакомых. Кто этот человек, откуда вы знакомы, как с ним связаться и о чём договорились:
+        всё в одной карточке.
+      </p>
+      <CtaButton class="lg:mt-8 lg:gap-48 lg:self-start" />
+    </div>
+    <ContactCard />
+  </div>
+</section>

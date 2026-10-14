@@ -1,0 +1,21 @@
+---
+import CtaButton from "./CtaButton.astro";
+import Logo from "./Logo.astro";
+---
+
+<section aria-labelledby="final-title" class="bg-ink text-white">
+  <div
+    class="mx-auto flex max-w-page flex-col gap-58 px-gutter pt-56 pb-48 lg:gap-112 lg:px-gutter-lg lg:pt-112 lg:pb-48"
+  >
+    <div class="flex flex-col gap-18 lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-80">
+      <h2 id="final-title" class="text-closing lg:text-closing-lg">Начните с одного человека</h2>
+      <div class="flex flex-col gap-28">
+        <p class="text-lead text-on-dark lg:text-lead-lg">
+          Добавьте того, с кем говорили сегодня, и запишите, о чём договорились.
+        </p>
+        <CtaButton variant="dark" />
+      </div>
+    </div>
+    <Logo variant="footer" />
+  </div>
+</section>

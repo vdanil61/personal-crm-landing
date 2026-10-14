@@ -1,0 +1,9 @@
+---
+import { APP_URL } from "../config";
+import Logo from "./Logo.astro";
+---
+
+<header class="flex items-center justify-between px-gutter py-18 lg:px-gutter-lg lg:py-28">
+  <Logo />
+  <a href={APP_URL} class="text-nav text-accent-hover hover:opacity-85 lg:text-nav-lg">Войти</a>
+</header>

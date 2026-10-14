@@ -1,0 +1,240 @@
+/*
+ * Design tokens: the only place for colors, fonts and spacing.
+ * Values come from design/README.md and design/reference/*.html.
+ * Text roles are paired: `name` for mobile, `name-lg` for desktop (lg: and up).
+ */
+
+/* Geologica, self-hosted (variable font, weights 300–600) */
+@font-face {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("/fonts/geologica-cyrillic.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("/fonts/geologica-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  /* Fonts */
+  --font-*: initial;
+  --font-sans: "Geologica", system-ui, sans-serif;
+  --font-corner: sans-serif; /* "+" marks in the corners of CTA buttons */
+  /* "→" in CTA buttons. Geologica has no arrow, and there is no generic fallback
+     on purpose: the browser picks its own arrow glyph, exactly as in the design */
+  --font-arrow: "Geologica";
+
+  /* Colors */
+  --color-*: initial;
+  --color-white: #fff;
+  --color-page: #eceef5; /* base background */
+  --color-ink: #16182b; /* main text, final block background */
+  --color-muted: #4a4d66; /* subtitles, benefit texts */
+  --color-subtle: #5d6077; /* small captions, dates */
+  --color-accent: #4b4fe0; /* button, avatar, active note */
+  --color-accent-hover: #3c3fc4; /* button hover; links, labels, icons */
+  --color-accent-soft: #dfe1fb; /* icon tile background */
+  --color-line: #e3e5ef; /* dividers inside white cards */
+  --color-line-soft: #d4d6ef; /* inactive note line */
+  --color-on-dark: #c4c6dc; /* text on dark background */
+  --color-mark-dark: #8f92ff; /* button "+" marks on dark */
+  --color-accent-hover-dark: #5d61f0; /* button hover on dark */
+
+  /* Spacing: 1 unit = 1px, so p-20 is 20px, as in the design */
+  --spacing: 1px;
+  --spacing-gutter: 20px;
+  --spacing-gutter-lg: 80px;
+  --spacing-section: 72px; /* bottom space of sections 1–4 */
+  --spacing-section-lg: 140px;
+  --container-page: 1440px;
+
+  /* Effects */
+  --shadow-card: 0 24px 60px rgba(40, 44, 110, 0.1);
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: ease;
+
+  /* Text roles: size, line height, letter spacing, weight */
+  --text-*: initial;
+
+  /* h1 */
+  --text-display: 44px;
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.04em;
+  --text-display--font-weight: 500;
+  --text-display-md: 64px; /* 1024–1279px, so the hero grid fits */
+  --text-display-md--line-height: 1;
+  --text-display-md--letter-spacing: -0.045em;
+  --text-display-md--font-weight: 500;
+  --text-display-lg: 80px;
+  --text-display-lg--line-height: 1;
+  --text-display-lg--letter-spacing: -0.045em;
+  --text-display-lg--font-weight: 500;
+
+  /* h2 */
+  --text-heading: 36px;
+  --text-heading--line-height: 1.05;
+  --text-heading--letter-spacing: -0.04em;
+  --text-heading--font-weight: 500;
+  --text-heading-lg: 56px;
+  --text-heading-lg--line-height: 1.05;
+  --text-heading-lg--letter-spacing: -0.04em;
+  --text-heading-lg--font-weight: 500;
+
+  /* h2 of the final block */
+  --text-closing: 40px;
+  --text-closing--line-height: 1.02;
+  --text-closing--letter-spacing: -0.04em;
+  --text-closing--font-weight: 500;
+  --text-closing-lg: 72px;
+  --text-closing-lg--line-height: 1;
+  --text-closing-lg--letter-spacing: -0.045em;
+  --text-closing-lg--font-weight: 500;
+
+  /* h3 */
+  --text-title: 19px;
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.02em;
+  --text-title--font-weight: 500;
+  --text-title-lg: 22px;
+  --text-title-lg--line-height: 1.2;
+  --text-title-lg--letter-spacing: -0.02em;
+  --text-title-lg--font-weight: 500;
+
+  /* paragraphs of hero and final block */
+  --text-lead: 16px;
+  --text-lead--line-height: 1.5;
+  --text-lead--font-weight: 300;
+  --text-lead-lg: 20px;
+  --text-lead-lg--line-height: 1.5;
+  --text-lead-lg--font-weight: 300;
+
+  /* problem tiles */
+  --text-problem: 16px;
+  --text-problem--line-height: 1.45;
+  --text-problem--font-weight: 400;
+  --text-problem-lg: 20px;
+  --text-problem-lg--line-height: 1.4;
+  --text-problem-lg--font-weight: 400;
+  --text-number: 13px;
+  --text-number--line-height: 1.45;
+  --text-number--font-weight: 400;
+  --text-number-lg: 15px;
+  --text-number-lg--line-height: normal;
+  --text-number-lg--font-weight: 400;
+
+  /* solution list */
+  --text-feature: 16px;
+  --text-feature--line-height: 1.45;
+  --text-feature--font-weight: 400;
+  --text-feature-lg: 18px;
+  --text-feature-lg--line-height: 1.45;
+  --text-feature-lg--font-weight: 400;
+
+  /* benefit tiles */
+  --text-benefit: 15px;
+  --text-benefit--line-height: 1.5;
+  --text-benefit--font-weight: 300;
+  --text-benefit-lg: 16px;
+  --text-benefit-lg--line-height: 1.5;
+  --text-benefit-lg--font-weight: 300;
+
+  /* CTA button */
+  --text-cta: 16px;
+  --text-cta--line-height: normal;
+  --text-cta--font-weight: 500;
+  --text-cta-lg: 18px;
+  --text-cta-lg--line-height: normal;
+  --text-cta-lg--font-weight: 500;
+  --text-corner: 14px;
+  --text-corner--line-height: 1;
+  --text-corner--font-weight: 300;
+
+  /* logo and header link */
+  --text-logo: 17px;
+  --text-logo--line-height: 1;
+  --text-logo--font-weight: 600;
+  --text-logo-lg: 20px;
+  --text-logo-lg--line-height: 1;
+  --text-logo-lg--font-weight: 600;
+  --text-logo-footer: 15px;
+  --text-logo-footer--line-height: 1;
+  --text-logo-footer--font-weight: 600;
+  --text-logo-footer-lg: 16px;
+  --text-logo-footer-lg--line-height: 1;
+  --text-logo-footer-lg--font-weight: 600;
+  --text-nav: 14px;
+  --text-nav--line-height: normal;
+  --text-nav--font-weight: 400;
+  --text-nav-lg: 16px;
+  --text-nav-lg--line-height: normal;
+  --text-nav-lg--font-weight: 400;
+
+  /* demo contact card */
+  --text-card-name: 18px;
+  --text-card-name--line-height: normal;
+  --text-card-name--letter-spacing: -0.02em;
+  --text-card-name--font-weight: 500;
+  --text-card-name-lg: 26px;
+  --text-card-name-lg--line-height: normal;
+  --text-card-name-lg--letter-spacing: -0.02em;
+  --text-card-name-lg--font-weight: 500;
+  --text-card-meta: 13px;
+  --text-card-meta--line-height: normal;
+  --text-card-meta--font-weight: 300;
+  --text-card-meta-lg: 15px;
+  --text-card-meta-lg--line-height: normal;
+  --text-card-meta-lg--font-weight: 300;
+  --text-card-contacts: 13px;
+  --text-card-contacts--line-height: normal;
+  --text-card-contacts--font-weight: 400;
+  --text-card-contacts-lg: 15px;
+  --text-card-contacts-lg--line-height: normal;
+  --text-card-contacts-lg--font-weight: 400;
+  --text-card-avatar: 14px;
+  --text-card-avatar--line-height: normal;
+  --text-card-avatar--font-weight: 500;
+  --text-card-avatar-lg: 18px;
+  --text-card-avatar-lg--line-height: normal;
+  --text-card-avatar-lg--font-weight: 500;
+  --text-card-label: 12px;
+  --text-card-label--line-height: normal;
+  --text-card-label--letter-spacing: 0.06em;
+  --text-card-label--font-weight: 400;
+  --text-card-label-lg: 13px;
+  --text-card-label-lg--line-height: normal;
+  --text-card-label-lg--letter-spacing: 0.06em;
+  --text-card-label-lg--font-weight: 400;
+  --text-note-date: 12px;
+  --text-note-date--line-height: normal;
+  --text-note-date--font-weight: 300;
+  --text-note-date-lg: 13px;
+  --text-note-date-lg--line-height: normal;
+  --text-note-date-lg--font-weight: 300;
+  --text-note: 14px;
+  --text-note--line-height: 1.35;
+  --text-note--font-weight: 400;
+  --text-note-lg: 17px;
+  --text-note-lg--line-height: 1.35;
+  --text-note-lg--font-weight: 400;
+}
+
+:root {
+  /* Page background: a soft vertical blend that separates the blocks */
+  --background-page: linear-gradient(
+    180deg,
+    var(--color-page) 0%,
+    #e4e6f7 18%,
+    #ebe4f5 36%,
+    #e1ebf4 56%,
+    #e8e6f8 76%,
+    var(--color-page) 100%
+  );
+}
