@@ -1,0 +1,66 @@
+name: Deploy
+
+# Push to main: build dist/, copy it to the server, check that the live home page is the new build.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    # One deploy at a time; a newer push waits instead of interrupting a deploy halfway
+    concurrency:
+      group: production
+      cancel-in-progress: false
+    env:
+      SITE_URL: https://percrm.ru/
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - name: Set up SSH
+        env:
+          KNOWN_HOSTS: ${{ vars.DEPLOY_KNOWN_HOSTS }}
+          PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      # The server lets this key only rsync into the site folder, so the remote path is empty
+      - name: Copy dist/ to the server
+        env:
+          HOST: ${{ vars.DEPLOY_HOST }}
+        run: >
+          rsync --recursive --links --times --perms --chmod=D755,F644 --delete --itemize-changes
+          -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=30"
+          dist/ "landing@$HOST:"
+
+      - name: Check the live home page (200 and same as this build)
+        run: |
+          expected="$(sha256sum < dist/index.html)"
+          for attempt in 1 2 3 4 5; do
+            status="$(curl --silent --show-error --max-time 30 --output served.html --write-out '%{http_code}' "$SITE_URL")" || status=000
+            if [ "$status" = 200 ] && [ "$(sha256sum < served.html)" = "$expected" ]; then
+              echo "$SITE_URL answers 200 and serves the build of $GITHUB_SHA"
+              exit 0
+            fi
+            echo "Attempt $attempt: HTTP $status, page is not the new build yet"
+            sleep 10
+          done
+          exit 1
